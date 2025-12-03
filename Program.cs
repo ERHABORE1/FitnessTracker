@@ -36,7 +36,6 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-// ⭐ KEEP ONLY THIS ONE
 app.UseCookiePolicy(new CookiePolicyOptions
 {
     MinimumSameSitePolicy = SameSiteMode.Lax
