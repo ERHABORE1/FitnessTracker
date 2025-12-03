@@ -266,5 +266,5 @@ This is not a full audit, but accessibility was considered when structuring the 
 2. **Clone the repository**
 
    ```bash
-   git clone <your-repo-url>.git
+   git clone https://github.com/ERHABORE1/FitnessTracker.git
    cd FitnessTracker
