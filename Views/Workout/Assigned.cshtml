@@ -1,0 +1,50 @@
+@using FitnessTracker.Models
+@model List<TrainerAssignedWorkout>
+
+@{
+    ViewData["Title"] = "Assigned Workouts";
+}
+
+<div class="container py-5">
+    <h2 class="fw-bold mb-4">Your Assigned Workouts</h2>
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info">
+            You don’t have any assigned workouts yet.
+        </div>
+    }
+    else
+    {
+        <div class="row row-cols-1 row-cols-md-2 g-4">
+            @foreach (var assignment in Model)
+            {
+                <div class="col">
+                    <div class="card shadow-sm h-100">
+                        <div class="card-body">
+                            <h4 class="card-title">
+                                @assignment.Template?.TemplateName
+                            </h4>
+
+                            <p class="text-muted mb-1">
+                                Assigned by:
+                                <strong>@assignment.Trainer?.Name</strong>
+                            </p>
+
+                            <p class="text-muted mb-3">
+                                Date: @assignment.AssignedDate.ToShortDateString()
+                            </p>
+
+                            <a asp-controller="Workout"
+                               asp-action="AssignedEntry"
+                               asp-route-assignedId="@assignment.TrainerAssignedWorkoutId"
+                               class="btn btn-dark w-100">
+                                Use this Workout
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>

@@ -1,0 +1,133 @@
+@{
+    ViewData["Title"] = "Workout Hub";
+
+    // Read ?assignedId=XX from the query string (if present)
+    var assignedId = Context.Request.Query["assignedId"].ToString();
+}
+
+<input type="hidden" id="AssignedId" value="@assignedId" />
+
+<section class="container py-5">
+
+    <h1 class="display-5 mb-4">Workout Hub</h1>
+
+    <!-- FORM CARD -->
+    <div class="card shadow-sm mb-5">
+        <div class="card-header bg-dark text-white">
+            <h5 class="mb-0" id="form-title">Add New Workout</h5>
+        </div>
+
+        <div class="card-body">
+            <form id="workoutForm">
+
+                <input type="hidden" id="WorkoutId" name="WorkoutId" value="0" />
+
+                <div class="mb-3">
+                    <label class="form-label">Workout Name / Style</label>
+                    <input type="text"
+                           class="form-control"
+                           id="WorkoutStyle"
+                           name="WorkoutStyle"
+                           required />
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <label class="form-label">Duration (minutes)</label>
+                        <input type="number"
+                               class="form-control"
+                               id="DurationMinutes"
+                               name="DurationMinutes"
+                               min="0" />
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+                        <label class="form-label">Total Sets</label>
+                        <input type="number"
+                               class="form-control"
+                               id="TotalSets"
+                               name="TotalSets"
+                               min="0" />
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+                        <label class="form-label">Total Reps</label>
+                        <input type="number"
+                               class="form-control"
+                               id="TotalReps"
+                               name="TotalReps"
+                               min="0" />
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Notes</label>
+                    <textarea class="form-control"
+                              id="Notes"
+                              name="Notes"
+                              rows="3"
+                              placeholder="Bench 3×10 at 135 lb, Squat 4×8 at 185 lb, etc."></textarea>
+                </div>
+
+                <div class="d-flex justify-content-end">
+                    <button type="button"
+                            id="cancelBtn"
+                            class="btn btn-secondary me-2"
+                            style="display:none;">
+                        Cancel
+                    </button>
+
+                    <button type="submit"
+                            id="submitBtn"
+                            class="btn btn-dark">
+                        Add Workout
+                    </button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+    <!-- LIST + ASSIGNED WORKOUTS -->
+    <div class="row g-4">
+
+        <!-- LIST OF WORKOUTS -->
+        <div class="col-lg-8">
+            <h2 class="mb-3 text-center">Your Workouts</h2>
+
+            <div id="alertContainer"></div>
+
+            <div id="emptyState" class="text-center py-5" style="display:none;">
+                <p class="text-muted">No workouts logged yet.</p>
+            </div>
+
+            <div id="loadingSpinner" class="text-center py-5" style="display:none;">
+                <div class="spinner-border text-dark"></div>
+                <p class="text-muted">Loading workouts...</p>
+            </div>
+
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-2 g-4"
+                 id="workoutCardsContainer">
+            </div>
+        </div>
+
+        <!-- ASSIGNED WORKOUTS TILE -->
+        <div class="col-lg-4">
+            <div class="ft-feature-card h-100">
+                <h4>Assigned Workouts</h4>
+                <p>View workouts your trainer assigned to you.</p>
+                <a asp-controller="Workout"
+                   asp-action="Assigned"
+                   class="ft-btn-black w-100 text-center d-inline-block">
+                    Open
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+@section Scripts {
+    <script type="module" src="~/js/workoutIndex.js"></script>
+}

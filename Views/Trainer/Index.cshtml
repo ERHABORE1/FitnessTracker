@@ -1,0 +1,50 @@
+@{
+    ViewData["Title"] = "Trainer Dashboard";
+}
+
+<div class="container mt-5">
+
+    <h2 class="fw-bold mb-4">Trainer Dashboard 👨‍🏫</h2>
+
+    <p class="text-muted">
+        Welcome! From here, you can manage your clients and assign workout plans.
+    </p>
+
+    <div class="row mt-4 g-4">
+
+        <!-- Manage Clients -->
+        <div class="col-md-6">
+            <div class="card trainer-card p-3 shadow-sm h-100">
+                <h4>Clients</h4>
+                <p>View clients and send access requests.</p>
+                <a asp-controller="Trainer"
+                   asp-action="Clients"
+                   class="btn btn-dark w-100">
+                    Manage Clients
+                </a>
+            </div>
+        </div>
+
+        <!-- Assign Workouts -->
+        <div class="col-md-6">
+            <div class="card trainer-card p-3 shadow-sm h-100">
+                <h4>Assign Workouts</h4>
+                <p>Assign workout templates to accepted clients.</p>
+                <a asp-controller="Trainer"
+                   asp-action="Assign"
+                   class="btn btn-dark w-100">
+                    Assign Workouts
+                </a>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<style>
+    .trainer-card {
+        border-radius: 15px;
+        border: none;
+    }
+</style>
+

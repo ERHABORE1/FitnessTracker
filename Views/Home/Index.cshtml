@@ -1,0 +1,146 @@
+﻿@{
+    ViewData["Title"] = "Home";
+}
+
+<section class="ft-hero text-center py-5">
+    <h1 class="ft-hero-title">Your Fitness Journey Starts Here</h1>
+
+    <p class="ft-hero-subtitle mx-auto">
+        Track your workouts, monitor your progress, and stay motivated.
+        Fitness Tracker gives you a clean, simple, and powerful dashboard
+        to help you reach your goals — inspired by premium fitness experiences.
+    </p>
+
+    <div class="mt-4 d-flex justify-content-center gap-3">
+        <a asp-controller="Auth" asp-action="Register" class="ft-btn-black">
+            Create Free Account
+        </a>
+
+        <a asp-controller="Auth" asp-action="Login" class="ft-btn-white">
+            Sign In
+        </a>
+    </div>
+</section>
+
+<section class="container text-center mt-5">
+    <h2 class="fw-bold mb-4">Why Fitness Tracker?</h2>
+
+    <div class="row g-4">
+        <div class="col-md-4">
+            <div class="ft-feature-card">
+                <h4>Track Every Workout</h4>
+                <p>Record your lifts, reps, sets, and cardio with an easy-to-use interface.</p>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="ft-feature-card">
+                <h4>Visualize Progress</h4>
+                <p>Charts, stats, and weekly summaries help you stay consistent.</p>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="ft-feature-card">
+                <h4>Build Custom Plans</h4>
+                <p>Create personalized workout plans that match your schedule and goals.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="container text-center my-5 py-5 ft-showcase">
+    <h2 class="fw-bold mb-3">A Clean Dashboard You’ll Love</h2>
+    <p class="text-muted mb-4">
+        Designed for simplicity and focus. All your fitness data — clearly organized.
+    </p>
+
+    <div class="ft-showcase-box">
+        <p>(Dashboard preview coming soon)</p>
+    </div>
+</section>
+
+<section class="text-center py-5 ft-call-to-action">
+    <h2>Join the Movement</h2>
+    <p class="text-muted mb-3">
+        Start today and take control of your fitness journey.
+    </p>
+
+    <a asp-controller="Auth" asp-action="Register" class="ft-btn-black">
+        Get Started Free
+    </a>
+</section>
+
+<style>
+    .ft-hero {
+        background: #fafafa;
+    }
+
+    .ft-hero-title {
+        font-size: 3rem;
+        font-weight: 800;
+        color: #111;
+    }
+
+    .ft-hero-subtitle {
+        font-size: 1.2rem;
+        max-width: 650px;
+        color: #444;
+    }
+
+    .ft-btn-black {
+        background: #000;
+        color: #fff !important;
+        padding: 14px 28px;
+        border-radius: 50px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: 0.3s;
+    }
+
+    .ft-btn-black:hover {
+        opacity: 0.7;
+    }
+
+    .ft-btn-white {
+        background: #fff;
+        color: #000 !important;
+        padding: 14px 28px;
+        border-radius: 50px;
+        border: 2px solid #000;
+        font-weight: 600;
+        text-decoration: none;
+        transition: 0.3s;
+    }
+
+    .ft-btn-white:hover {
+        background: #000;
+        color: #fff !important;
+    }
+
+    .ft-feature-card {
+        background: #fff;
+        border-radius: 15px;
+        padding: 25px;
+        border: 1px solid #eee;
+        transition: 0.3s;
+    }
+
+    .ft-feature-card:hover {
+        border-color: #000;
+    }
+
+    .ft-showcase-box {
+        height: 260px;
+        background: #111;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+    }
+
+    .ft-call-to-action {
+        background: #f0f0f0;
+    }
+</style>

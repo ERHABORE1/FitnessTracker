@@ -1,0 +1,146 @@
+/* GLOBAL WHITE BACKGROUND */
+.ft-body-white {
+    background: #ffffff;
+    color: #000;
+    font-family: 'Inter', system-ui, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* HEADER */
+.ft-header-white {
+    background: #ffffff;
+    border-bottom: 1px solid #eaeaea;
+}
+
+.ft-logo-white-text {
+    font-size: 1.4rem;
+    font-weight: 800;
+    letter-spacing: 0.15em;
+    color: #111111;
+}
+
+/* NAVBAR */
+.ft-nav-items .nav-link {
+    margin-left: 1rem;
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: #333333 !important;
+    transition: 0.15s;
+}
+
+.ft-nav-items .nav-link:hover {
+    color: #000 !important;
+}
+
+/* ICONS */
+.ft-login-icon i,
+.ft-cart-icon i {
+    font-size: 1.4rem;
+}
+
+/* MAIN CONTENT */
+.ft-main-white {
+    padding-top: 2rem;
+    padding-bottom: 3rem;
+}
+
+/* HERO TITLE */
+.ft-hero-title-white {
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    color: #111;
+}
+
+/* SUBTITLE */
+.ft-hero-subtitle-white {
+    color: #555;
+    font-size: 1.1rem;
+    max-width: 600px;
+    line-height: 1.6;
+}
+
+/* BUTTONS */
+.ft-btn-black {
+    padding: 0.75rem 2rem;
+    background: #000;
+    border-radius: 40px;
+    color: #fff;
+    border: none;
+    font-size: 0.9rem;
+    letter-spacing: 0.08em;
+    font-weight: 500;
+    transition: 0.15s;
+}
+
+.ft-btn-black:hover {
+    opacity: 0.85;
+}
+
+/* WHITE GHOST BUTTON */
+.ft-btn-white {
+    padding: 0.75rem 2rem;
+    background: #fff;
+    border-radius: 40px;
+    border: 1px solid #000;
+    color: #000;
+    font-size: 0.9rem;
+    transition: 0.15s;
+}
+
+.ft-btn-white:hover {
+    background: #000;
+    color: #fff;
+}
+
+/* FOOTER */
+.ft-footer-white {
+    margin-top: auto;
+    border-top: 1px solid #eaeaea;
+    background: #ffffff;
+    color: #555;
+}
+.badge.rounded-pill {
+    border: 1px solid #dcdcdc !important;
+    color: #333 !important;
+    background: #ffffff !important;
+    font-size: 0.9rem;
+    padding: 0.55rem 1.3rem !important;
+    border-radius: 999px !important;
+}
+
+.ft-signup-section {
+    margin-bottom: 4rem;
+}
+.ft-signup-input {
+    border: 1px solid #dcdcdc;
+    border-radius: 40px;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    width: 100%;
+    max-width: 400px;
+    margin-right: 1rem;
+}
+
+/* FIX GYMSHARK FILTER PILLS */
+.badge.rounded-pill {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    min-width: 120px; /* ensures we SEE the pill */
+    height: 40px; 
+    border: 1px solid #dcdcdc !important;
+    background: #ffffff !important;
+    color: #000 !important;
+    font-size: 0.95rem !important;
+    font-weight: 500;
+    padding: 0 1.2rem !important;
+    border-radius: 999px !important;
+    box-sizing: border-box;
+}
+.badge.rounded-pill .bi {
+    margin-right: 0.5rem;
+    font-size: 1.1rem;
+}

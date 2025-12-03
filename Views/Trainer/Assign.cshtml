@@ -1,0 +1,68 @@
+@using FitnessTracker.Models
+@{
+    ViewData["Title"] = "Assign Template";
+    var clients = ViewBag.Clients as List<User> ?? new();
+    var templates = ViewBag.Templates as List<WorkoutTemplate> ?? new();
+}
+
+<section class="container py-5">
+    <h2 class="mb-4">Assign Workout Template to Client</h2>
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["Success"]
+        </div>
+    }
+
+    @if (!clients.Any())
+    {
+        <div class="alert alert-warning">
+            No accepted clients are available yet.
+        </div>
+    }
+    else
+    {
+        <form asp-controller="Trainer"
+              asp-action="AssignTemplate"
+              method="post">
+
+            <div class="mb-3">
+                <label for="clientSelect" class="form-label fw-bold">Client</label>
+                <select id="clientSelect"
+                        class="form-select"
+                        name="clientId"
+                        required>
+                    <option value="">-- Select Client --</option>
+                    @foreach (var c in clients)
+                    {
+                        <option value="@c.UserId">
+                            @c.Name (@c.Email)
+                        </option>
+                    }
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="templateSelect" class="form-label fw-bold">Template</label>
+                <select id="templateSelect"
+                        class="form-select"
+                        name="templateId"
+                        required>
+                    <option value="">-- Select Template --</option>
+                    @foreach (var t in templates)
+                    {
+                        <option value="@t.WorkoutTemplateId">
+                            @t.TemplateName
+                        </option>
+                    }
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-dark mt-3">
+                Assign Template
+            </button>
+
+        </form>
+    }
+</section>

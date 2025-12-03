@@ -1,0 +1,55 @@
+@model FitnessTracker.Models.TrainerAssignedWorkout
+
+@{
+    ViewData["Title"] = "Log Assigned Workout";
+
+    // Safely serialize exercises for the assigned template
+    var exerciseJson = "[]";
+    if (Model.Template?.Exercises != null)
+    {
+        exerciseJson = System.Text.Json.JsonSerializer.Serialize(
+            Model.Template.Exercises.Select(e => new
+            {
+                e.ExerciseName,
+                e.Sets,
+                e.Reps
+            })
+        );
+    }
+}
+
+<div class="container py-5">
+    <h2 class="fw-bold mb-4">Log Assigned Workout</h2>
+
+    <form asp-controller="Workout" asp-action="SaveAssigned" method="post">
+        <!-- Assigned workout ID -->
+        <input type="hidden" name="AssignedId" value="@Model.TrainerAssignedWorkoutId" />
+
+        <!-- Required workout style (stored as Workout.WorkoutStyle) -->
+        <input type="hidden" name="WorkoutStyle" value="@Model.Template?.TemplateName" />
+
+        <!-- Exercise JSON for client-side rendering -->
+        <input type="hidden" id="ExerciseData" value='@exerciseJson' />
+
+        <div class="mb-4">
+            <h4 class="fw-bold mb-3">Exercises</h4>
+            <div id="exerciseContainer" class="border rounded p-3 bg-light"></div>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label fw-semibold">Notes</label>
+            <textarea class="form-control"
+                      name="Notes"
+                      rows="4"
+                      placeholder="How did you feel? Any issues or PRs?"></textarea>
+        </div>
+
+        <button class="btn btn-dark w-100" type="submit">
+            Save Workout
+        </button>
+    </form>
+</div>
+
+@section Scripts {
+    <script src="~/js/assignedEntry.js"></script>
+}

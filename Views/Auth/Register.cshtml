@@ -1,0 +1,124 @@
+@model FitnessTracker.Models.User
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Register";
+}
+
+<div class="auth-container mt-5">
+    <h2 class="auth-title">Create Account</h2>
+
+    @if (ViewBag.Error != null)
+    {
+        <div class="alert alert-danger text-center">@ViewBag.Error</div>
+    }
+
+    <form asp-action="Register" asp-controller="Auth" method="post" class="auth-form">
+        <label class="auth-label">Name</label>
+        <input asp-for="Name" class="auth-input" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+
+        <label class="auth-label">Email</label>
+        <input asp-for="Email" type="email" class="auth-input" autocomplete="email" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+
+        <label class="auth-label">Password</label>
+        <input asp-for="Password" type="password" class="auth-input" autocomplete="new-password" />
+        <span asp-validation-for="Password" class="text-danger"></span>
+
+        <label class="auth-label">Confirm Password</label>
+        <input asp-for="ConfirmPassword" type="password" class="auth-input" autocomplete="new-password" />
+        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+
+        <label class="auth-label">Account Type</label>
+        <select asp-for="Role" class="auth-input">
+            <option value="User">Regular User</option>
+            <option value="Trainer">Trainer</option>
+        </select>
+        <span asp-validation-for="Role" class="text-danger"></span>
+
+        <button class="auth-button mt-2">Register</button>
+    </form>
+
+    <p class="text-center mt-2" style="font-size: 0.9rem;">
+        By creating an account, you agree to our
+        <a asp-controller="Auth" asp-action="Terms" class="terms-link">
+            Terms &amp; Conditions
+        </a>.
+    </p>
+
+    <p class="auth-switch mt-3 text-center">
+        Already have an account?
+        <a asp-controller="Auth" asp-action="Login" class="auth-link">Sign in</a>
+    </p>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+<style>
+    .auth-container {
+        max-width: 450px;
+        margin: 0 auto;
+        padding-top: 40px;
+    }
+
+    .auth-title {
+        text-align: center;
+        font-weight: 700;
+        margin-bottom: 35px;
+        font-size: 2rem;
+        color: #111;
+    }
+
+    .auth-label {
+        font-size: 0.95rem;
+        font-weight: 600;
+        margin-bottom: 5px;
+        color: #333;
+    }
+
+    .auth-input {
+        width: 100%;
+        border: 1px solid #dcdcdc;
+        border-radius: 10px;
+        padding: 12px 15px;
+        margin-bottom: 20px;
+        font-size: 1rem;
+        background: #fafafa;
+        transition: 0.2s;
+    }
+
+    .auth-input:focus {
+        outline: none;
+        border-color: #000;
+        background: #fff;
+    }
+
+    .auth-button {
+        width: 100%;
+        background: #111;
+        color: white;
+        padding: 14px;
+        border: none;
+        border-radius: 10px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        transition: 0.2s;
+    }
+
+    .auth-button:hover {
+        background: #000;
+        opacity: 0.85;
+    }
+
+    .auth-switch {
+        font-size: 0.9rem;
+    }
+
+    .auth-link,
+    .terms-link {
+        text-decoration: underline;
+    }
+</style>

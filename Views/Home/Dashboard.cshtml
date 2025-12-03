@@ -1,0 +1,69 @@
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<section class="container py-5">
+
+    <h2 class="fw-bold mb-4">
+        Welcome back, @Context.Session.GetString("UserName") 👋
+    </h2>
+
+    @* Trainer access requests *@
+    @if (ViewBag.Requests != null && ViewBag.Requests.Count > 0)
+    {
+        <div class="alert alert-info p-4 mb-4">
+            <h5 class="fw-bold mb-3">Trainer Access Requests</h5>
+
+            @foreach (var r in ViewBag.Requests)
+            {
+                <div class="d-flex justify-content-between align-items-center mb-2 p-2 bg-light rounded">
+                    <div>
+                        <strong>@r.Trainer?.Name</strong> is requesting access to your workouts.
+                    </div>
+
+                    <div class="d-flex gap-2">
+                        <form asp-controller="Trainer" asp-action="AcceptRequest" method="post">
+                            <input type="hidden" name="id" value="@r.TrainerClientRequestId" />
+                            <button class="btn btn-success btn-sm">Accept</button>
+                        </form>
+
+                        <form asp-controller="Trainer" asp-action="DeclineRequest" method="post">
+                            <input type="hidden" name="id" value="@r.TrainerClientRequestId" />
+                            <button class="btn btn-danger btn-sm">Decline</button>
+                        </form>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+
+    <p class="text-muted">
+        Here’s your fitness overview. Start your next workout or check your progress.
+    </p>
+
+    <div class="row mt-4 g-4">
+        <div class="col-md-6">
+            <div class="ft-feature-card">
+                <h4>Your Workouts</h4>
+                <p>Start today’s session or view past workouts.</p>
+                <a asp-controller="Workout"
+                   asp-action="Index"
+                   class="ft-btn-black w-100 text-center">
+                    Open
+                </a>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="ft-feature-card">
+                <h4>Your Progress</h4>
+                <p>Track your weight changes and view graphs over time.</p>
+                <a asp-controller="Progress"
+                   asp-action="Index"
+                   class="ft-btn-black w-100 text-center">
+                    View
+                </a>
+            </div>
+        </div>
+    </div>
+</section>

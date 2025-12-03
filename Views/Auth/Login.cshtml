@@ -1,0 +1,85 @@
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Login";
+}
+
+<div class="auth-container mt-5">
+    <h2 class="auth-title">Sign In</h2>
+
+    @if (ViewBag.Error != null)
+    {
+        <div class="alert alert-danger text-center">@ViewBag.Error</div>
+    }
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success text-center">@TempData["Success"]</div>
+    }
+
+    <form method="post" class="auth-form">
+        <label class="auth-label">Email</label>
+        <input name="email" class="auth-input" autocomplete="email" />
+
+        <label class="auth-label">Password</label>
+        <input name="password" type="password" class="auth-input" autocomplete="current-password" />
+
+        <button class="auth-button">Login</button>
+    </form>
+</div>
+
+<style>
+    .auth-container {
+        max-width: 450px;
+        margin: 0 auto;
+        padding-top: 40px;
+    }
+
+    .auth-title {
+        text-align: center;
+        font-weight: 700;
+        margin-bottom: 35px;
+        font-size: 2rem;
+        color: #111;
+    }
+
+    .auth-label {
+        font-size: 0.95rem;
+        font-weight: 600;
+        margin-bottom: 5px;
+        color: #333;
+    }
+
+    .auth-input {
+        width: 100%;
+        border: 1px solid #dcdcdc;
+        border-radius: 10px;
+        padding: 12px 15px;
+        margin-bottom: 20px;
+        font-size: 1rem;
+        background: #fafafa;
+        transition: 0.2s;
+    }
+
+    .auth-input:focus {
+        outline: none;
+        border-color: #000;
+        background: #fff;
+    }
+
+    .auth-button {
+        width: 100%;
+        background: #111;
+        color: white;
+        padding: 14px;
+        border: none;
+        border-radius: 10px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        transition: 0.2s;
+    }
+
+    .auth-button:hover {
+        background: #000;
+        opacity: 0.85;
+    }
+</style>

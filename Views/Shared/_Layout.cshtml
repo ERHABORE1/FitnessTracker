@@ -1,0 +1,127 @@
+﻿@{
+    var title = ViewData["Title"] ?? "Fitness Tracker";
+    var isLoggedIn = Context.Session.GetString("UserId") != null;
+    var role = Context.Session.GetString("Role");
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@title - Fitness Tracker</title>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+
+<body class="ft-body-white">
+
+    <!-- HEADER / NAVBAR -->
+    <header class="ft-header-white shadow-sm">
+        <nav class="navbar navbar-expand-lg navbar-light bg-white ft-nav-white">
+            <div class="container">
+
+                <!-- LOGO -->
+                <a class="navbar-brand ft-logo-white" asp-controller="Home" asp-action="Index">
+                    <span class="ft-logo-white-text">FITNESSTRACKER</span>
+                </a>
+
+                <!-- MOBILE MENU ICON -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- NAV LINKS -->
+                <div class="collapse navbar-collapse" id="mainNav">
+                    <ul class="navbar-nav ms-auto ft-nav-items">
+
+                        <!-- Always visible -->
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+
+                        @if (isLoggedIn)
+                        {
+                            if (role == "User")
+                            {
+                                <!-- User navigation -->
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-controller="Home" asp-action="Dashboard">Dashboard</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-controller="Workout" asp-action="Index">Workouts</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-controller="Progress" asp-action="Index">Progress</a>
+                                </li>
+                            }
+                            else if (role == "Trainer")
+                            {
+                                <!-- Trainer navigation -->
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-controller="Trainer" asp-action="Index">Dashboard</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-controller="Trainer" asp-action="Clients">Clients</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-controller="Trainer" asp-action="Assign">Assign Workouts</a>
+                                </li>
+                            }
+
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Auth" asp-action="Logout">Logout</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <!-- Logged-out navigation -->
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Auth" asp-action="Login">Login</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Auth" asp-action="Register">Register</a>
+                            </li>
+                        }
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="ft-main-white">
+        <div class="container">
+            @RenderBody()
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="ft-footer-white mt-5">
+        <div class="container text-center py-3">
+            <span>&copy; @DateTime.Now.Year Fitness Tracker – All Rights Reserved</span>
+        </div>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js"></script>
+
+    <!-- jQuery + Validation -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/4.0.0/jquery.validate.unobtrusive.min.js"></script>
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,79 @@
+@model IEnumerable<FitnessTracker.Models.User>
+
+@{
+    ViewData["Title"] = "Clients";
+    var requests = ViewBag.Requests as List<FitnessTracker.Models.TrainerClientRequest> ?? new();
+}
+
+<section class="container py-5">
+    <h2 class="mb-4">All Clients</h2>
+
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+        @foreach (var c in Model)
+        {
+            // Latest request for this client, if any
+            var req = requests
+                .Where(r => r.ClientId == c.UserId)
+                .OrderByDescending(r => r.SentDate)
+                .FirstOrDefault();
+
+            <div class="col">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+
+                        <h5 class="mb-1">@c.Name</h5>
+                        <p class="text-muted mb-3">@c.Email</p>
+
+                        @* Case 1: No request ever *@
+                        @if (req == null)
+                        {
+                            <form asp-action="RequestAccess"
+                                  asp-controller="Trainer"
+                                  method="post">
+                                <input type="hidden" name="clientId" value="@c.UserId" />
+                                <button class="btn btn-dark w-100">Request Access</button>
+                            </form>
+                        }
+                        @* Case 2: Pending *@
+                        else if (req.Status == "Pending")
+                        {
+                            <button class="btn btn-secondary w-100" disabled>
+                                Pending...
+                            </button>
+                        }
+                        @* Case 3: Declined → can request again *@
+                        else if (req.Status == "Declined")
+                        {
+                            <form asp-action="RequestAccess"
+                                  asp-controller="Trainer"
+                                  method="post">
+                                <input type="hidden" name="clientId" value="@c.UserId" />
+                                <button class="btn btn-warning w-100">Request Again</button>
+                            </form>
+                        }
+                        @* Case 4: Accepted → view client progress *@
+                        else if (req.Status == "Accepted")
+                        {
+                            <div class="d-grid gap-2">
+                                <a asp-controller="Trainer"
+                                   asp-action="ProgressView"
+                                   asp-route-clientId="@c.UserId"
+                                   class="btn btn-success w-100">
+                                    Approved ✔ View Progress
+                                </a>
+                            </div>
+                        }
+
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</section>
+
+<style>
+    .card {
+        border: none;
+        border-radius: 12px;
+    }
+</style>
